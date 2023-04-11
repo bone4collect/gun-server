@@ -1,16 +1,10 @@
 const express = require('express')
-import Gun from "gun"
-
+const gun = require('gun')
 const app = express()
-const port = process.env.PORT || 9000
-
-app.use(Gun.serve)
-app.get('/',(_, res)=> {
-    res.status(200).send('> DEBUG: Solciety Node is Live')
+const port = 3040
+app.use(gun.serve)
+const server = app.listen(port , () =>{   
+    console.log(listening on port ${port})
 })
 
-const server = app.listen(port, ()=> {
-    console.log(`> DEBUG: Solciety Node is listening at http://localhost:${port}`)
-})
-
-Gun({web: server})
+gun({ web : server});
